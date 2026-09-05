@@ -1397,7 +1397,8 @@ def main():
         print("=" * 60)
         sys.exit(1)
 
-    loop = asyncio.get_event_loop()
+    loop = asyncio.new_event_loop()
+    asyncio.set_event_loop(loop)
     loop.run_until_complete(init_system())
 
     for admin_id in ADMIN_IDS:
