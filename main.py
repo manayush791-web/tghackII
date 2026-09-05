@@ -1496,7 +1496,7 @@ def main():
     app.add_handler(conv_handler)
 
     if AUTO_RESTART_ENABLED:
-        asyncio.create_task(auto_restart_task())
+        loop.create_task(auto_restart_task())
 
     print("✅ Admin bot initialized")
     print("📱 Send /start to your admin bot")
