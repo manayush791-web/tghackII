@@ -13,11 +13,12 @@ class Database:
         self._pool = None
 
     async def _connect(self):
-        """Get or create connection"""
-        if self._pool is None or self._pool.closed:
-            self._pool = await aiosqlite.connect(self.db_path)
-            self._pool.row_factory = aiosqlite.Row
-        return self._pool
+    """Get or create database connection."""
+    if self._pool is None:
+        self._pool = await aiosqlite.connect(self.db_path)
+        self._pool.row_factory = aiosqlite.Row
+    return self._pool
+
 
     async def init(self):
         """Initialize all tables"""
@@ -95,10 +96,11 @@ class Database:
         await conn.commit()
 
     async def close(self):
-        if self._pool and not self._pool.closed:
-            await self._pool.close()
-            self._pool = None
-
+    """Close database connection."""
+    if self._pool is not None:
+        await self._pool.close()
+        self._pool = None
+        
     # ─── Bot Management ───
     async def add_bot(self, token, username=None, welcome_msg=None, buttons_json=None, bio=None, theme="royal_gold"):
         conn = await self._connect()
