@@ -143,10 +143,10 @@ def format_welcome(first_name, custom_msg=None, theme_name="royal_gold", bio=Non
 <tg-spoiler>🎁 Tap any emoji to see it come alive!</tg-spoiler>"""
 
     if bio:
-        msg += f"
+        msg += f"""
 
 📋 <b>About:</b>
-<blockquote>{bio}</blockquote>"
+<blockquote>{bio}</blockquote>"""
 
     full = f"""{header}
 
